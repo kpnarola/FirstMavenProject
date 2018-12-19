@@ -22,7 +22,7 @@ public class Registration1 {
 
 
     public static void main(String[] args) {
-
+        System.setProperty("webdriver.chrome.driver", "src\\BrowserDriver\\chromedriver.exe");
 
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -78,9 +78,9 @@ public class Registration1 {
       click on Electronics - cell phones - HTC One Mini Blue - email a friend -
       fill up required details and click on Send Email button - and
       verify "Only registered customers can use email a friend feature" message*/
+        System.setProperty("webdriver.chrome.driver", "src\\BrowserDriver\\chromedriver.exe");
 
-
-                driver = new ChromeDriver();
+        driver = new ChromeDriver();
         //Entering wait 30 sec
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         //Browser Maximising
@@ -105,39 +105,39 @@ public class Registration1 {
         driver.findElement(By.xpath("//input[@name=\"send-email\"]")).click();
         String expectedErrorMessage = "Only registered customers can use email a friend feature";
         String actualdErrorMessage = driver.findElement(By.xpath("//li[contains(text(),'Only registered customers can use email a friend feature')]")).getText();
-        Assert.assertEquals("Displayed message is not as expected, test is failed",expectedErrorMessage,actualdErrorMessage);
+        Assert.assertEquals("Displayed message is not as expected, test is failed", expectedErrorMessage, actualdErrorMessage);
+        //closing browser
         driver.quit();
 
 
+    }
+
+    @Test
+    /*on "https://demo.nopcommerce.com/" when User change price in Euro Product Price should be in Euro Verify any product*/
+    public void verifyCurrency() {
+        System.setProperty("webdriver.chrome.driver", "src\\BrowserDriver\\chromedriver.exe");
+        //Variable Declaration
+        String ExpectedResult = "Ђ1548.00";
+        driver = new ChromeDriver();
+        //Entering waite
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        //Window in full screen
+        driver.manage().window().fullscreen();
+        //Opening Website
+        driver.get("https://demo.nopcommerce.com/");
+        //Click on customer currency and select euro
+        driver.findElement(By.id("customerCurrency")).findElement(By.xpath("//option[contains(text(),'Euro')]")).click();
+        //comparing auto change in euro currency
+        driver.findElement(By.xpath("//img[@alt=\"Picture of Apple MacBook Pro 13-inch\"]")).click();
+        String ActualResult = driver.findElement(By.xpath("//span[@itemprop=\"price\"]")).getText();
+
+        //result verification
+        Assert.assertEquals("currency scenario failed", ExpectedResult, ActualResult);
+        //closing browser
+        driver.quit();
 
     }
-@Test
-/*on "https://demo.nopcommerce.com/" when User change price in Euro Product Price should be in Euro Verify any product*/
-    public void verifyCurrency(){
-        //Variable Declaration
-    String ExpectedResult = "Ђ1548.00";
-     driver = new ChromeDriver();
-     //Entering waite
-     driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
-     //Window in full screen
-     driver.manage().window().fullscreen();
-     //Opening Website
-     driver.get("https://demo.nopcommerce.com/");
-     driver.findElement(By.id("customerCurrency")).findElement(By.xpath("//option[contains(text(),'Euro')]")).click();
-     driver.findElement(By.xpath("//img[@alt=\"Picture of Apple MacBook Pro 13-inch\"]")).click();
-     String ActualResult = driver.findElement(By.xpath("//span[@itemprop=\"price\"]")).getText();
-
-     Assert.assertEquals("currency scenario failed", ExpectedResult, ActualResult);
-     //Assert.assertArrayEquals("Currency Scenario Failed", ExpectedResult, ActualResult);
-
-
-
-}
-
-@Test
-    public void verifyNewProject(){
-        
-}
+    
 }
 
 
