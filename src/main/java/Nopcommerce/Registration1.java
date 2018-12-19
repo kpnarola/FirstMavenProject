@@ -134,6 +134,10 @@ public class Registration1 {
 
 }
 
+@Test
+    public void verifyNewProject(){
+        
+}
 }
 
 
